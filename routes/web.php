@@ -25,11 +25,11 @@ Route::get('/', function () {
 
 
 Route::get('posts/{post}', function ($slug) {
-    // Find a post by its slug and pass it to a view called "post"
+
     return view('post', [
-        'post' => Post::find($slug) // Aquí se eliminó el punto y coma incorrecto
+        'post' =>  Post::findOrFail($slug)
     ]);
-})->where('post', '[A-z_\-]+');
+});
 
 Auth::routes();
 
