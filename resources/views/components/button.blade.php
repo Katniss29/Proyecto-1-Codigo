@@ -1,0 +1,1 @@
+<button>{{$slog}}</button>
