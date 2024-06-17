@@ -4,6 +4,7 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
+  
     return view('posts', [
         'posts' => Post::all()
-    ]);
+    ]); 
 });
+
 
 Route::get('posts/{post}', function ($slug) {
     // Find a post by its slug and pass it to a view called "post"
