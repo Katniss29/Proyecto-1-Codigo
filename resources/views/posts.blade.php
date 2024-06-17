@@ -5,38 +5,16 @@
 
 
 <body>
-    <article>
 
-        <h1><a href="/posts/my-first-post">My First Post</a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, dolorem? Repellat culpa quas aspernatur, 
-            laborum temporibus blanditiis quos omnis veniam fugiat obcaecati expedita unde odit exercitationem consequatur est 
-            labore velit.
-        </p>
+    <?php foreach ($posts as $post) : ?> 
 
-    </article>
+        <article>
 
-    <article>
+            <?= $post; ?>
 
-        <h1><a href="/posts/my-second-post">My Second Post</a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, dolorem? Repellat culpa quas aspernatur, 
-            laborum temporibus blanditiis quos omnis veniam fugiat obcaecati expedita unde odit exercitationem consequatur est 
-            labore velit.
-        </p>
+        </article>
 
-    </article>
-
-    <article>
-
-        <h1><a href="/posts/my-third-post">My Third Post </a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, dolorem? Repellat culpa quas aspernatur, 
-            laborum temporibus blanditiis quos omnis veniam fugiat obcaecati expedita unde odit exercitationem consequatur est 
-            labore velit.
-        </p>
-
-    </article>
+    <?php endforeach; ?>
     
 </body>
 
