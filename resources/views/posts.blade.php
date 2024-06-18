@@ -12,8 +12,12 @@
                 <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
             </p>
 
+            <p>
+                <a href="/categories/{{ $post->category->id }}">{{ $post->category->name}}</a>
+            </p>
+
             <div>
-                {{ $post->excerpt }}
+                {!! $post->excerpt !!}
             </div>
         </article>
     @endforeach
