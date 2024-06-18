@@ -10,16 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
     protected $guarded = [];
-=======
-    protected $guarded =[];
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
->>>>>>> a434854402a4837457c54b3eade1dfd1bffd9b2e
 
     public function category(): BelongsTo
     {

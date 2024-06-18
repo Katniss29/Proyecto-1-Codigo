@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,16 +33,7 @@ Route::get('posts/{post:slug}', function (Post $post) {
     ]);
 });
 
-<<<<<<< HEAD
-Route::get('categories/{category}', [CategoryController::class, 'show']);
-=======
-Route::get('categories/{category}', function (Category $category) {
-
-    return view('posts', [
-        'posts' => $category->posts
-    ]);
-});
->>>>>>> a434854402a4837457c54b3eade1dfd1bffd9b2e
+Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
 
 Auth::routes();
 
