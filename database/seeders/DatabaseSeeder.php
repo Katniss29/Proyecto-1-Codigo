@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         Post::truncate();
 
 
+        Post::factory()->create();
 
+    /*
 
         $user = User::factory()->create();
 
@@ -60,6 +62,6 @@ class DatabaseSeeder extends Seeder
             'excerpt' => 'Lorem ipsum dolar sit amet.',
             'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi tempore earum id! Repellendus, laudantium itaque. Corrupti, vel similique. Expedita ratione voluptatibus id repudiandae natus ab inventore cupiditate iusto maxime eveniet.'
 
-        ]);
+        ]); */
     }
 }
