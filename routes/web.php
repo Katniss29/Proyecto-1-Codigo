@@ -2,7 +2,9 @@
 
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -31,9 +33,12 @@ Route::get('posts/{post:slug}', function (Post $post) {
     ]);
 });
 
+Route::get('categories/{category}', [CategoryController::class, 'show']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 
 
