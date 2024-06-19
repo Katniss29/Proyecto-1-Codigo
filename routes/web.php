@@ -22,7 +22,7 @@ Route::get('/', function () {
 
   
     return view('posts', [
-        'posts' => Post::with('category')->get()
+        'posts' => Post::latest()->with(['category', 'author'])->get()
     ]); 
 });
 
@@ -35,6 +35,7 @@ Route::get('posts/{post:slug}', function (Post $post) {
 });
 
 Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
+Route::get('authors/{author:username}', [CategoryController::class, 'authors']);
 
 Auth::routes();
 
