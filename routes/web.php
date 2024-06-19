@@ -20,7 +20,6 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
 
-  
     return view('posts', [
         'posts' => Post::latest()->get()
     ]); 
