@@ -27,8 +27,18 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest();
+
+        if (request('search')) {
+            $posts
+            ->where('title', 'like', '%' . request('search') . '%')
+            ->orWhere('body', 'like', '%' . request('search') . '%');
+        }
+
+        $posts = $posts->get(); // Agregar el método get() al final para ejecutar la consulta y obtener los resultados
+
         $categories = Category::all();
+
         return view('posts', compact('posts', 'categories'));
     }
 }
