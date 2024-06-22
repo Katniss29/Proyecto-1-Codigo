@@ -19,10 +19,8 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-
-    return view('posts', [
-        'posts' => Post::latest()->get()
-    ]); 
+    $posts = Post::latest()->get(); // Obtén todos los posts ordenados por fecha
+    return view('posts', compact('posts')); // Pasa los posts a la vista 'posts'
 });
 
 
