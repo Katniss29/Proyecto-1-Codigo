@@ -18,26 +18,15 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::latest()->get(); // Obtén todos los posts ordenados por fecha
-    return view('posts', compact('posts')); // Pasa los posts a la vista 'posts'
-});
 
+
+Route::get('/', [CategoryController::class, 'index'])->name('posts.index');
+Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('authors/{author:username}', [CategoryController::class, 'authors'])->name('authors.show');
 
 Route::get('posts/{post:slug}', function (Post $post) {
-
-    return view('post', [
-        'post' =>  $post
-    ]);
+    return view('post', ['post' =>  $post]);
 });
 
-Route::get('categories/{category:slug}', [CategoryController::class, 'show']);
-Route::get('authors/{author:username}', [CategoryController::class, 'authors']);
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-
