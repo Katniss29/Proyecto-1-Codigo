@@ -5,6 +5,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -18,15 +19,11 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-
-
-Route::get('/', [CategoryController::class, 'index'])->name('posts.index');
+Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('authors/{author:username}', [CategoryController::class, 'authors'])->name('authors.show');
 
-Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', ['post' =>  $post]);
-});
-
 Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
