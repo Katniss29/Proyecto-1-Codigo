@@ -10,13 +10,7 @@ use App\Models\User;
 
 class CategoryController extends Controller
 {
-    public function show(Category $category)
-    {
-        $posts = $category->posts;
-        $categories = Category::all(); // Obtener todas las categorías
-        $currentCategory = $category; // Obtener la categoría actual
-        return view('posts', compact('posts', 'categories', 'currentCategory')); // Pasar posts, categories y currentCategory a la vista 'posts'
-    }
+   
 
     public function authors(User $author)
     {

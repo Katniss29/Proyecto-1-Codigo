@@ -23,6 +23,8 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('authors/{author:username}', [CategoryController::class, 'authors'])->name('authors.show');
+Route::get('categories/{category}', [PostController::class, 'index'])->name('categories.posts');
+
 
 Auth::routes();
 
