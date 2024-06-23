@@ -32,12 +32,13 @@ class PostController extends Controller
         }
 
         // Retornar la vista con los posts, categorías y categoría actual
-        return view('posts', compact('posts', 'categories', 'currentCategory'));
+        return view('posts.index', compact('posts', 'categories', 'currentCategory'));
     }
+
 
     public function show(Post $post)
     {
         // Mostrar la vista del post individual
-        return view('post', compact('post'));
+        return view('posts.show', compact('post'));
     }
 }
