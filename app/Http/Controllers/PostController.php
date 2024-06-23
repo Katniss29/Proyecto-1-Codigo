@@ -13,32 +13,27 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener los filtros desde la solicitud
-        $filters = [
-            'search' => $request->input('search'),
-            'category' => $request->input('category'),
-        ];
+        $query = Post::latest();
 
-        // Consultar los posts filtrados
-        $posts = Post::latest()->filter($filters)->get();
-
-        // Obtener todas las categorías
-        $categories = Category::all();
-
-        // Obtener la categoría actualmente seleccionada
-        $currentCategory = null;
-        if ($request->has('category')) {
-            $currentCategory = Category::firstWhere('slug', $request->category);
+        if ($search = $request->input('search')) {
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('body', 'like', '%' . $search . '%');
         }
 
-        // Retornar la vista con los posts, categorías y categoría actual
-        return view('posts.index', compact('posts', 'categories', 'currentCategory'));
-    }
+        if ($author = $request->input('author')) {
+            $query->whereHas('author', function ($query) use ($author) {
+                $query->where('username', $author);
+            });
+        }
 
+        $posts = $query->get();
+        $categories = Category::all();
+
+        return view('posts.index', compact('posts', 'categories'));
+    }
 
     public function show(Post $post)
     {
-        // Mostrar la vista del post individual
         return view('posts.show', compact('post'));
     }
 }

@@ -10,29 +10,18 @@ use App\Models\User;
 
 class CategoryController extends Controller
 {
-   
-
-    public function authors(User $author)
+    public function show(Category $category)
     {
-        $posts = $author->posts;
-        $categories = Category::all(); // Obtener todas las categorías
-        return view('posts', compact('posts', 'categories')); // Pasar posts y categories a la vista 'posts'
+        $posts = $category->posts;
+        $categories = Category::all();
+        return view('posts.index', compact('posts', 'categories'));
     }
 
-    public function index()
+    public function authors($username)
     {
-        $posts = Post::latest();
-
-        if (request('search')) {
-            $posts
-            ->where('title', 'like', '%' . request('search') . '%')
-            ->orWhere('body', 'like', '%' . request('search') . '%');
-        }
-
-        $posts = $posts->get(); // Agregar el método get() al final para ejecutar la consulta y obtener los resultados
-
+        $author = User::where('username', $username)->firstOrFail();
+        $posts = $author->posts;
         $categories = Category::all();
-
-        return view('posts', compact('posts', 'categories'));
+        return view('posts.index', compact('posts', 'categories'));
     }
 }

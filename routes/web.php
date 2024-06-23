@@ -1,8 +1,7 @@
 <?php
 
 
-use App\Models\Post;
-use App\Models\Category;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
@@ -19,12 +18,9 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
-Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('authors/{author:username}', [CategoryController::class, 'authors'])->name('authors.show');
-Route::get('categories/{category}', [PostController::class, 'index'])->name('categories.posts');
 
+Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Auth::routes();
 
