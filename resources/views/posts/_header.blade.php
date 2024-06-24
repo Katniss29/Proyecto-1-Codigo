@@ -6,16 +6,14 @@
         <!--  Category -->
         <div class="relative lg:inline-flex bg-gray-100 rounded-xl">
             <x-category-dropdown />
-        </div>
+        </div>
         <!-- Other Filters -->
-
         <!--<div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
             <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
                 <option value="category" disabled selected>Other Filters</option>
                 <option value="foo">Foo</option>
                 <option value="bar">Bar</option>
             </select>
-
             <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                  height="22" viewBox="0 0 22 22">
                 <g fill="none" fill-rule="evenodd">
@@ -26,9 +24,9 @@
                 </g>
             </svg>
         </div>-->
-        
-       <!-- Search -->
-       <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
+
+        <!-- Search -->
+        <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
             <form method="GET" action="/">
                 @if (request('category'))

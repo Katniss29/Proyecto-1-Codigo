@@ -8,7 +8,6 @@ use App\Models\Category;
 
 use App\Models\User;
 
-
 class PostController extends Controller
 {
     public function index(Request $request)
@@ -17,10 +16,11 @@ class PostController extends Controller
         $filters = [
             'search' => $request->input('search'),
             'category' => $request->input('category'),
+            'author' => $request->input('author'),
         ];
 
-        // Consultar los posts filtrados
-        $posts = Post::latest()->filter($filters)->get();
+        // Consultar los posts filtrados paginados
+        $posts = Post::latest()->filter($filters)->paginate(6)->withQueryString();
 
         // Obtener todas las categorías
         $categories = Category::all();
@@ -31,10 +31,9 @@ class PostController extends Controller
             $currentCategory = Category::firstWhere('slug', $request->category);
         }
 
-        // Retornar la vista con los posts, categorías y categoría actual
+        // Retornar la vista con los posts paginados, categorías y categoría actual
         return view('posts.index', compact('posts', 'categories', 'currentCategory'));
     }
-
 
     public function show(Post $post)
     {
