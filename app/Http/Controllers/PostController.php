@@ -20,6 +20,12 @@ class PostController extends Controller
                   ->orWhere('body', 'like', '%' . $search . '%');
         }
 
+        if ($category = $request->input('category')) {
+            $query->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        }
+
         if ($author = $request->input('author')) {
             $query->whereHas('author', function ($query) use ($author) {
                 $query->where('username', $author);
