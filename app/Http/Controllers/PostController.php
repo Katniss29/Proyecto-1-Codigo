@@ -13,33 +13,32 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Post::latest();
+        // Obtener los filtros desde la solicitud
+        $filters = [
+            'search' => $request->input('search'),
+            'category' => $request->input('category'),
+        ];
 
-        if ($search = $request->input('search')) {
-            $query->where('title', 'like', '%' . $search . '%')
-                  ->orWhere('body', 'like', '%' . $search . '%');
-        }
+        // Consultar los posts filtrados
+        $posts = Post::latest()->filter($filters)->get();
 
-        if ($category = $request->input('category')) {
-            $query->whereHas('category', function ($query) use ($category) {
-                $query->where('slug', $category);
-            });
-        }
-
-        if ($author = $request->input('author')) {
-            $query->whereHas('author', function ($query) use ($author) {
-                $query->where('username', $author);
-            });
-        }
-
-        $posts = $query->get();
+        // Obtener todas las categorías
         $categories = Category::all();
 
-        return view('posts.index', compact('posts', 'categories'));
+        // Obtener la categoría actualmente seleccionada
+        $currentCategory = null;
+        if ($request->has('category')) {
+            $currentCategory = Category::firstWhere('slug', $request->category);
+        }
+
+        // Retornar la vista con los posts, categorías y categoría actual
+        return view('posts.index', compact('posts', 'categories', 'currentCategory'));
     }
+
 
     public function show(Post $post)
     {
+        // Mostrar la vista del post individual
         return view('posts.show', compact('post'));
     }
 }
