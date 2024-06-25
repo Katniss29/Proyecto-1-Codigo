@@ -39,9 +39,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() : HasMany
+    /**
+     * Set the user's password.
+     *
+     * @param string $password
+     * @return void
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
+     * Get the posts for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 }
+
 
