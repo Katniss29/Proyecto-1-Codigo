@@ -20,5 +20,7 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('registers', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('registers', [RegisterController::class, 'store'])->middleware('guest');
+Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
