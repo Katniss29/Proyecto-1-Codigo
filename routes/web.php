@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SessionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,15 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [PostController::class, 'index'])->name('home');
+
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+
 Route::get('registers', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('registers', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::get('loginn', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('loginn', [SessionsController::class, 'store'])->middleware('guest');
+
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
 Auth::routes();
