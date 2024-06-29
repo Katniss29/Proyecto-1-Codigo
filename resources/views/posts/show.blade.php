@@ -48,8 +48,8 @@
                 </div>
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-6">
-
-                <form method="POST" action="#" class="border border-gray-200 p-6 rounded-xl">
+            <x-panel>
+                <form method="POST" action="/posts/{{ $post->slug}}/comments">
                     @csrf
 
                     <header class="flex items-center">
@@ -61,7 +61,11 @@
                     </header>
 
                     <div class="mt-1">
-                        <textarea name="body"  class="w-full text-sm focus:outline-none focus:ring"  rows="5" placeholder="Quick, thing of something to say !"></textarea>
+                        <textarea 
+                            name="body"  
+                            class="w-full text-sm focus:outline-none focus:ring" 
+                            rows="5" 
+                            placeholder="Quick, thing of something to say !"></textarea>
                     </div>
                     
 
@@ -71,6 +75,7 @@
 
 
                 </form>
+            </x-panel>
                     @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment" />
                     @endforeach
