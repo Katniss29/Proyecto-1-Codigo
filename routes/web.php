@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,25 @@ use App\Http\Controllers\SessionsController;
 */
 
 Route::get('/', [PostController::class, 'index'])->name('home');
+
+Route::get('ping', function (){
+
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apikey' => config('services.mailchimp.key'),
+        'server' => 'us13'
+    ]);
+
+    $response = $mailchimp->lists->addListMember('d3c0c95629', [
+        'email_address' => 'arceemi29@gmail.com',
+        'status' => 'subscribed'
+    ]);
+
+    ddd($response);
+
+
+})
 
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
