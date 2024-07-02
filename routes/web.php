@@ -6,9 +6,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\NewsletterController;
 use Illuminate\Http\Request;
 use MailchimpMarketing\ApiClient;
+use App\Http\Controllers\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,28 +23,8 @@ use MailchimpMarketing\ApiClient;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::post('/', [PostController::class, 'index']);
+Route::post('newsletter', NewsletterController::class);
 
-Route::post('newsletter', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
-
-    $mailchimp = new ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => config('services.mailchimp.server')
-    ]);
-
-    try {
-        $response = $mailchimp->lists->addListMember(config('services.mailchimp.lists.subscribers'), [
-            'email_address' => $request->email,
-            'status' => 'subscribed'
-        ]);
-
-        return redirect('/')->with('success', 'You are now signed up for our newsletter!');
-    } catch (\Exception $e) {
-        return redirect('/')->with('error', 'Failed to subscribe: ' . $e->getMessage());
-    }
-});
 
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
