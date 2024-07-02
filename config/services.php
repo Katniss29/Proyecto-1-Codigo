@@ -32,9 +32,10 @@ return [
     
     'mailchimp' => [
         'key' => env('MAILCHIMP_KEY'),
+        'server' => env('MAILCHIMP_SERVER_PREFIX'),
         'lists' => [
-            'subscribers' => env('MAILCHIMP_LIST_SUBSCRIBERS')
-        ]
+            'subscribers' => env('MAILCHIMP_LIST_SUBSCRIBERS'),
+        ],
     ]
 
 ];
