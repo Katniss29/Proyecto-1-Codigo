@@ -4,8 +4,7 @@
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             {{-- Imagen de ilustración --}}
-            <img src="/images/illustration-1.png" alt="Blog Post illustration" class="rounded-xl">
-        </div>
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl">
 
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8 lg:mt-0">
